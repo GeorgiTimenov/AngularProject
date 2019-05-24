@@ -1,0 +1,179 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id ="content" style="text-align:center">
+    <ngx-spinner
+        bdOpacity = 0.9
+        bdColor = "#333"
+        size = "large"
+        color = "#fff"
+        type = "ball-atom"
+        fullScreen = "true"
+        >
+        <p style="color: white" > Loading... </p>
+    </ngx-spinner>
+    <div style="position: absolute;
+    color: white;
+    right: 20px;
+    bottom: 20px;">{{spaceVersion}}</div>
+    <div class="card-view">
+        <div class="logo-view">
+            <img [src]="logoUrlForMark" style="width:100%; height: 100%"/>
+        </div>
+        <div *ngIf = "infoViewShow" class="info-view">
+            <div class="info-view-title1">
+                {{spaceName}}
+            </div>
+            <div class="info-view-title2">
+                {{spaceCompany}}
+            </div>
+        </div>
+        <div class="button-view" (click)="toggleInfoViewShow($event)">
+            <i *ngIf = "infoViewShow" class="fas fa-angle-left button-icon"></i>
+            <i *ngIf = "!infoViewShow" class="fas fa-angle-right button-icon"></i>
+        </div>
+    </div>
+    <div class = "panel">
+      <div class="content">
+        <div class="content-cell" style="float: left; padding-left: 20px">
+          <div>TOOL</div>
+          <div class="content-cell-content">
+            <div class="content-cell-item" tooltip="Measurement" placement="bottom" style="float: left" (click)="toggleFuctionsIndex(1)">
+                <img   [className]="functionIndex === 1 ? 'content-cell-item-image-active' : 'content-cell-item-image'" [src]="frontImageArray[0]"/>
+            </div>
+            <div class="content-cell-item" tooltip="Pin" placement="bottom" (click)="toggleFuctionsIndex(2)">
+                <img [className]="functionIndex === 2 ? 'content-cell-item-image-active' : 'content-cell-item-image'" [src]="frontImageArray[1]"/>
+            </div>
+            <div class="content-cell-item" tooltip="Share" placement="bottom" style="float: right" (click)="toggleFuctionsIndex(3)">
+                <img [className]="functionIndex === 3 ? 'content-cell-item-image-active' : 'content-cell-item-image'" [src]="frontImageArray[2]"/>
+            </div>
+          </div>
+        </div>
+        <div class="content-cell">
+          <div>VIEW</div>
+          <div class="content-cell-content">
+            <div class="content-cell-item" tooltip="Walk" placement="bottom" style="float: left" (click)="toggleSceneModeIndex(1)">
+                <img [className]="screenModeIndex === 1 ? 'content-cell-item-image-active' : 'content-cell-item-image'" [src]="frontImageArray[3]"/>
+            </div>
+            <div class="content-cell-item" tooltip="3D View" placement="bottom" (click)="toggleSceneModeIndex(2)">
+                <img [className]="screenModeIndex === 2 ? 'content-cell-item-image-active' : 'content-cell-item-image'" [src]="frontImageArray[4]"/>
+            </div>
+            <div class="content-cell-item" tooltip="2D" placement="bottom" style="float: right" (click)="toggleSceneModeIndex(3)">
+                <img [className]="screenModeIndex === 3 ? 'content-cell-item-image-active' : 'content-cell-item-image'" [src]="frontImageArray[5]"/>
+            </div>
+          </div>
+        </div>
+        <div class="content-cell" style="float: right; padding-right: 20px">
+            <div class="content-cell-content">
+              <div class="content-cell-item" style="float: right" >
+                  <div>FLOOR</div>
+                  <div class="floor_bar" >
+                    <div class="floor_button" tooltip="Floor" placement="bottom" (click)="toggleFloorPanel()">
+                        <img [src]="frontImageArray[6]"/>
+                    </div>
+                    <div [className]="showFloorPanel ? 'floor_list' : 'floor_list_hidden'" id ="floor_list">
+                        <div *ngFor = "let item of floorDataArray" class="floor_item" (click) = "gotoFloor(item)">
+                            <div class="cell-text">
+                                LEVEL {{item}}
+                            </div>
+                            <div class="cell-toggle" >
+                                <div *ngIf = "previousFloorIndex === item" class ="cell-toggle-active">
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div> 
+
+      
+      <!-- <div class="title_bar" style="display: none">
+          <div class="toggle-view" (click)="toggleControlPanelShow()">
+              <i *ngIf = "!ControlPanelShow" class="fas fa-angle-up"></i>
+              <i *ngIf = "ControlPanelShow" class="fas fa-angle-down"></i>
+          </div>
+          <div (click)="toggleTitleIndex($event, 1)" [className]="titleIndex === 1 ? 'title_bar_cell_active' : 'title_bar_cell'" >VIEW</div>
+          
+          <div (click)="toggleTitleIndex($event, 3)"  [className]="titleIndex === 3 ? 'title_bar_cell_active' : 'title_bar_cell'">FUNCTIONS</div>
+      </div>
+      <div class="viewer_bar" style="display: none">
+          <div *ngIf = "titleIndex===1  && ControlPanelShow" class="viewer_bar_1">
+              
+          </div>
+          <div *ngIf = "titleIndex===2  && ControlPanelShow" class="viewer_bar_2">
+              <ul style="overflow-y: hidden">
+                  <li *ngFor="let element of highLightArray" class="list">
+                      <div (click)="toggleHighLightIndex(element.index)" class="viewer_bar_item">
+                          <img [src]="element.url"/>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+          <div *ngIf = "titleIndex===3 && ControlPanelShow" class="viewer_bar_3">
+              
+          </div>
+      </div> -->
+    </div>
+    <!-- <div class = "control">
+        <ul>
+            <li class="list">
+                <div class = "button" (click)="toggle3D($event)">
+                    <img src = "http://icons.iconarchive.com/icons/kyo-tux/aeon/32/Misc-Home-icon.png" />
+                    </div>
+            </li>
+            <li class="list">
+                <div class = "button" (click)="toggleMap($event)">
+                    <img src = "http://icons.iconarchive.com/icons/saki/snowish/32/Home-icon.png" />
+                </div>
+            </li>
+            <li class="list">
+                <div class = "button" (click)="toggleMeasurment($event)">
+                    <img src = "http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-10/32/Triangle-ruler-icon.png" />
+                </div>
+            </li>
+        </ul>
+    </div> -->
+    <div id="hotspot" class="hotspot">
+        <h2>GEOTAG</h2>
+        <h4>TITLE</h4>
+        <input [(ngModel)]="hotspot_title" />
+        <h4>CONTENT</h4>
+        <textarea [(ngModel)]="hotspot_content" rows="10" cols="50">
+            At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+        </textarea>
+        <div class="hotspot-colors">
+            <div *ngFor= "let color of hotspotColorArray; let i = index; " class="" [className]="hotspotColorIndex === i ? 'hotspot-color-active' : 'hotspot-color'" (click) = "hotSpotColorSelect(i)" [ngStyle]="{'background-color': color }">
+
+            </div>
+        </div>
+        <div>
+            <div class="hotspot_save" (click) = "hotSpotSave()">
+                SAVE
+            </div>
+            <div class="hotspot_cancel" (click) = "hotSpotCancel()">
+                Cancel
+            </div>
+        </div>
+    </div>
+    <div id="share" class="share">
+        <h2>SHARE</h2>
+        <h4>SHAREABLE LINK</h4>
+            <div>
+                <input readonly [(ngModel)]="shareableURL" />
+                <div class="share_copy" (click) = "shareableCopy()">
+                    COPY
+                </div>
+            </div>
+        <h4>DEEP LINK</h4>
+            <div>
+                <input readonly [(ngModel)]="deepLinkURL" />
+                <div class="share_copy" (click) = "deepLinkCopy()">
+                    COPY
+                </div>
+            </div>
+    </div>
+    <div id="mask" class="mask">
+    </div>
+</div>
+<router-outlet></router-outlet>

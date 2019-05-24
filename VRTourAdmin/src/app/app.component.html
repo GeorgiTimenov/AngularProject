@@ -1,0 +1,251 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="header">
+  <img src= "../admin/assets/images/Logo.png" (click) = "openNewWindow()">
+  <span (click) = "openNewWindow()">INSITE</span>
+</div>
+<div class="header-title">
+    <div class = "count">
+      {{items.length}} SPACES
+    </div>
+    <div class = "search">
+      <input [(ngModel)]="searchKey" />
+      <img id = "searchBtn" src="https://cdn1.iconfinder.com/data/icons/flat-web-browser/100/search-256.png" (click) = "searchMenu();">
+    </div>
+</div>
+<div class="popup" *ngIf = "popupIndex !== 0">
+  <div class="title">
+    <span>CONFIRM</span>
+  </div>
+  <div class="content">
+    <div *ngIf = "popupIndex === 1">
+      <div class="content-title">
+        <span>SHARE LINK</span>
+      </div>
+      <div class="content-action">
+        <input type="text" value="{{shareUrl}}"/>
+        <div (click) = "popupAction(popupIndex)" class="action-button">
+          <span>COPY</span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf = "popupIndex === 2">
+      <div class="content-title">
+        <span>Are you sure you want to delete this upload? This CANNOT be undone</span>
+      </div>
+    </div>
+  </div>
+  <div class="action">
+    <div *ngIf = "popupIndex === 2" (click) = "popupAction(2)" class="action-button">
+      <span>OK</span>
+    </div>
+    <div *ngIf = "popupIndex !== 2" (click) = "popupAction(0)" class="action-button">
+      <span>OK</span>
+    </div>
+    <div (click) = "popupAction(0)" class="action-button">
+      <span>CANCEL</span>
+    </div>
+  </div>
+</div> 
+<div id="modal" class="modal shadow">
+  <div class="modal-header">
+    <div class="modal-header-start">
+      CREATE NEW SPACE
+    </div>
+    <div class="modal-header-end" >
+        <img class="arrow" (click) = "hideModal()" src="https://cdn0.iconfinder.com/data/icons/pixon-1/24/Close_delete_outline_remove-256.png">
+    </div>
+  </div> 
+  <div class="modal-body">
+      <div id = "modal-content-1" class="modal-content-1">
+          <h2 style="text-align:center">Drag & Drop Assets ZIP For Upload</h2>
+          <file-drop contentClassName="file-drop-zone-multi-content" dropZoneClassName="file-drop-zone-multi-class" dropZoneLabel="" (onFileDrop)="droppedZip($event)" 
+            (onFileOver)="fileOver($event)"  (onFileLeave)="fileLeave($event)">
+            <div id = "progress-bar">
+              <div id = "progress-element">
+              </div>
+              <div id = "progress-status">Loading ...</div>
+            </div>
+          </file-drop>
+      </div>
+      <div id = "modal-part-1"  class = "modal-part-1">
+        <!-- <div style="font-weight: bold; margin-bottom: 10px;">NAME</div>
+        <input style="height: 25px;
+        width: 60%;
+        background: gainsboro;
+        border: 0px;
+        border-radius: 3px; "/> -->
+        <div style="font-weight: bold; margin-bottom: 10px; margin-top: 30px;">Upload 3D model</div>
+        <div id = "renderElement" class="center">
+            <div id = "progress-object-bar">
+              <div id = "progress-object-element">
+              </div>
+              <div id = "progress-object-status">Loading ...</div>
+            </div>
+        </div>
+      </div>  
+      <div id = "modal-part-2"  class = "modal-part-2" >
+          <!-- <div style="font-weight: bold; margin-bottom: 10px;">Keys</div>
+          <input style="height: 25px;
+          width: 60%;
+          background: gainsboro;
+          border: 0px;
+          border-radius: 3px; "/> -->
+          <div style="font-weight: bold; margin-top: 30px; margin-bottom: 10px;">Upload Images</div>
+          <div id = "sliderElement" class="center">
+              <div id = "sliderImageComponent">
+                <slideshow [height]="'50vh'"
+                [minHeight]="'50vh'"
+                [autoPlay]="false"
+                [showArrows]="true"
+                [imageUrls]="imageSources"
+                [lazyLoad]="imageSources?.length > 1"
+                [autoPlayWaitForLazyLoad]="true">
+                </slideshow>
+              </div>
+          </div>
+      </div>
+
+
+      <div id = "edit-part" class ="card-body edit-body"> 
+          <div style="font-weight: bold;">SPACE INFORMATION</div>
+          <div id="profile">
+            <div class="profile-left">
+              <div style="font-weight: bold; margin-bottom: 10px;">NAME</div>
+              <input
+              [(ngModel)]="newItemData.info.name"
+               style="height: 25px;
+              width: 100%;
+              background: gainsboro;
+              border: 0px;
+              border-radius: 3px; "/>
+              <div style="font-weight: bold; margin-top: 30px; margin-bottom: 10px">LOGO</div>
+              <div class="center" (click)="clickDropzone()">
+                  <file-drop contentClassName="file-drop-zone-content" dropZoneClassName="file-drop-zone-class" dropZoneLabel="" (onFileDrop)="droppedLogo($event)" 
+                  (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                  </file-drop>
+              </div>
+            </div>
+            <div class="profile-mid">
+                <div style="font-weight: bold; margin-bottom: 10px;">COMPANY</div>
+                <input
+                [(ngModel)]="newItemData.info.company"
+                style="height: 25px;
+                width: 100%;
+                background: gainsboro;
+                border: 0px;
+                border-radius: 3px; "/>
+            </div>
+            <div class="profile-right">
+                <div style="font-weight: bold; margin-bottom: 10px;">STREET</div>
+                <input
+                [(ngModel)]="newItemData.info.street"
+                style="height: 25px;
+                width: 100%;
+                background: gainsboro;
+                border: 0px;
+                border-radius: 3px; "/>
+                <div style="position: relative; display: inline-block;
+                width: 28%;
+                margin-right: 4%;">
+                    <div style="font-weight: bold; margin-top: 30px;margin-bottom: 10px;">CITY</div>
+                    <input
+                    [(ngModel)]="newItemData.info.city"
+                    style="height: 25px;
+                    width: 100%;
+                    background: gainsboro;
+                    border: 0px;
+                    border-radius: 3px; "/>
+                </div>
+                <div style="position: relative; display: inline-block;
+                width: 28%;
+                margin-right: 4%;">
+                    <div style="font-weight: bold; margin-top: 30px;margin-bottom: 10px;">STATE</div>
+                    <input 
+                    [(ngModel)]="newItemData.info.state"
+                    style="height: 25px;
+                    width: 100%;
+                    background: gainsboro;
+                    border: 0px;
+                    border-radius: 3px; "/>
+                </div>
+                <div style="position: relative; display: inline-block; width: 32%;">
+                    <div style="font-weight: bold; margin-top: 30px;margin-bottom: 10px;">ZIP</div>
+                    <input
+                    [(ngModel)]="newItemData.info.zip"
+                    style="height: 25px;
+                    width: 100%;
+                    background: gainsboro;
+                    border: 0px;
+                    border-radius: 3px; "/>
+                </div>
+                <div style="font-weight: bold; margin-top: 30px;margin-bottom: 10px;">COUNTRY</div>
+                <input
+                [(ngModel)]="newItemData.info.country"
+                style="height: 25px;
+                width: 40%;
+                background: gainsboro;
+                border: 0px;
+                border-radius: 3px; "/>
+            </div>
+          </div>
+        </div>
+
+
+
+      <div *ngIf = "openModelIndex === 2" id = "saveBtn" (click) = "saveSpace()">
+        Save
+      </div> 
+      <div *ngIf = "openModelIndex === 1 " id = "nextBtn" (click) = "nextModal(1)">
+        Next
+      </div> 
+      <div *ngIf = "(openModelIndex === 1 || openModelIndex === 2) && bNewSpace" id = "resetBtn" (click) = "resetBtn()">
+        Back
+      </div> 
+  </div> 
+</div> 
+<div class = "container">
+  <div class ="card-header shadow">
+    <div class="card-header-start" (click) = "clickSortMenu()">
+      DATA CREATED
+      <img class="arrow" src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/chevron-down-240.png">
+      <div *ngIf = "showSortMenu" class="menu shadow">
+        <div class="menu-item" (click) = "clickSortDate()">DATE</div>
+        <div class="menu-item" (click) = "clickSortName()">NAME</div>
+      </div>
+    </div>
+    <div class="card-header-end" (click) = "createSpace()">
+      <span>NEW SPACE</span>
+      <img class="arrow" src="https://cdn3.iconfinder.com/data/icons/unicons-vector-icons-pack/32/plus-256.png">
+    </div>
+    <div class="card-header-version-end" >
+      <span (click) = "clickVersion()">NEW VERSION</span>
+      <img class="arrow" (click) = "clickVersion()" src="https://cdn3.iconfinder.com/data/icons/minimal-browser-kit-2/32/update-256.png">
+      <div *ngIf = "showVersionMenu" class="menu shadow">
+          <input [(ngModel)]="versionKey" />
+          <div class="menu-item" style="text-align:center" (click) = "createVersion()">Create</div>
+          <div class="menu-item" style="text-align:center" (click) = "cancelVersion()">Cancel</div>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let item of items" class ="card-body shadow">
+    <div class="update-btn">
+      <span *ngIf="!item.updateFlag">{{item.version.name}}</span>
+      <span *ngIf="item.updateFlag" (click) = "clickUpdateButton(item)">Update</span>
+    </div>
+    <div class="action-btn">
+      <img src="https://cdn3.iconfinder.com/data/icons/text-editor-14/32/List-256.png" (click) = "clickMenu(item)"/>
+      <div *ngIf = "item.showMenu" class="menu shadow">
+        <div class="menu-item" (click) = "clickEdit(item)">EDIT</div>
+        <div class="menu-item" (click) = "clickDelete(item)">DELETE</div>
+        <div class="menu-item" (click) = "clickDownload(item)">DOWNLOAD</div>
+        <div class="menu-item" (click) = "clickShare(item)">SHARE</div>
+      </div>
+    </div>  
+    <img class = "display-image" [src]="item.img" />
+    <span class = "display-title">
+      <p class="title">{{item.title}}</p>
+      <p class="date">{{getDataFromTimeStamp(item.date)}}</p>
+    </span>
+  </div>
+</div>
+<router-outlet></router-outlet>

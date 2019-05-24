@@ -1,0 +1,371 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    background-color: gainsboro;
+    overflow: hidden;
+}
+.shadow {
+    -webkit-box-shadow: 0.5px 0.5px 1.5px 1.5px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    0.5px 0.5px 1.5px 1.5px #ccc;  /* Firefox 3.5 - 3.6 */
+    box-shadow:         0.5px 0.5px 1.5px 1.5px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+.header-title {
+    width: 100%;
+    height: 70px;
+    .count {
+        position: absolute;
+        font-size: 30px;
+        margin-top: 20px;
+        font-weight: bold;
+        left: 75px;
+    }
+    .search {
+        position: absolute;
+        position: absolute;
+        right: 100px;
+        margin-top: 20px;
+        input {
+            height: 25px;
+        }
+        img {
+            position: absolute;
+            width: 30px;
+            margin-left: 5px;
+        }
+    }
+}
+.modal {
+    display: none;
+    position: absolute;
+    width: calc(100vw - 100px);
+    margin: 50px;
+    height: calc(100vh - 100px);
+    background-color: white;
+    top: 0;
+    z-index: 9999;
+    border-radius: 5px;
+    .modal-header {
+        width: 100%;
+        height: 40px;
+        -webkit-box-shadow: 0px 5px 1.5px 0px #ccc;
+        -moz-box-shadow: 0px 5px 1.5px 0px #ccc;
+        box-shadow: 0px 5px 1.5px 0px #ccc;
+        .modal-header-start {
+            font-weight: bold;
+            position: absolute;
+            margin-top: 12px;
+            margin-left: 12px;
+        }
+        .modal-header-end {
+            font-weight: bold;
+            position: absolute;
+            right: 165px;
+            margin-top: 12px;
+            .arrow {
+                position: absolute;
+                width: 15px;
+                top: 0px;
+                left: 130px;
+            }
+        }
+    }
+    .modal-body {
+        height: calc(100% - 140px);
+        padding: 50px;
+        padding-top: 30px;
+        position: relative;
+        .modal-content-1 {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .modal-part-1 {
+            display: inline-block;
+            position:absolute;
+            width: 50%;
+            height: 100%;
+        }
+        .modal-part-2 {
+            position:absolute;
+            display: inline-block;
+            margin-left: 50%;
+            width: 50%;
+            height: 100%;
+        }
+        #nextBtn {
+            position: absolute;
+            bottom: 10px;
+            right: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 20px;
+            padding-left: 20px;
+            border: 1px solid;
+            border-radius: 10px;
+        }
+        #saveBtn {
+            position: absolute;
+            bottom: 10px;
+            right: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 20px;
+            padding-left: 20px;
+            border: 1px solid;
+            border-radius: 10px;
+        }
+        #resetBtn {
+            position: absolute;
+            bottom: 10px;
+            right: 150px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 20px;
+            padding-left: 20px;
+            border: 1px solid;
+            border-radius: 10px;
+        }
+    }
+}
+.menu {
+    position: absolute;
+    padding: 10px;
+    font-weight: 100;
+    background-color: white;
+    min-width: 100px;
+    z-index: 10;
+    .menu-item {
+        padding: 5px;
+        background-color: white;
+    }
+    .menu-item:hover { 
+        background-color: gainsboro;
+    }
+}
+.container {
+    width: calc(100vw - 200px);
+    padding-left: 100px;
+    padding-right: 100px;
+    height: calc(100vh - 140px);
+    overflow: scroll;
+    .card-header {
+        width: 100%;
+        height: 40px;
+        background-color: white;
+        border-radius: 5px;
+        position: relative;
+        .card-header-start {
+            font-weight: bold;
+            position: absolute;
+            margin-top: 12px;
+            margin-left: 12px;
+            width: 150px;
+            .arrow {
+                position: absolute;
+                width: 15px;
+                top: 0px;
+                left: 130px;
+            }
+        }
+        .card-header-end {
+            font-weight: bold;
+            position: absolute;
+            right: 0px;
+            width: 130px;
+            margin-top: 12px;
+            .arrow {
+                position: absolute;
+                width: 15px;
+                top: 0px;
+                left: 100px;
+            }
+        }
+        .card-header-version-end {
+            font-weight: bold;
+            position: absolute;
+            right: 150px;
+            width: 130px;
+            margin-top: 12px;
+            .arrow {
+                position: absolute;
+                width: 15px;
+                top: 0px;
+                left: 120px;
+            }
+        }
+    }
+    .card-body {
+        width: 100%;
+        height: 140px;
+        margin-top: 10px;
+        background-color: white;
+        border-radius: 5px;
+        position: relative;
+        .display-image {
+            width: auto;
+            margin-top: 15px;
+            margin-left: 15px;
+            height: 110px;
+        }
+        .display-title {
+            position: absolute;
+            margin-top: 20px;
+            text-align: center;
+            margin-left: 25px;
+            .title {
+                font-size: 30px;
+                font-weight: bold;
+                margin: 0px;
+            }
+            .date {
+                margin: 0px;
+                font-size: 18px;
+                font-weight: bold;
+            }
+        }
+        .action-btn {
+            position: absolute;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            margin-top: 50px;
+            text-align: center;
+            img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        .update-btn {
+            position: absolute;
+            right: 75px;
+            width: 50px;
+            height: 50px;
+            margin-top: 45px;
+            text-align: center;
+            line-height: 50px;
+        }
+    }
+}
+.file-drop-zone-content {
+    background-repeat: space;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    height: 20vh;
+    width: 20vh;
+    background-image: url("./assets/images/upload.png");
+    background-size: contain;
+}
+.file-drop-zone-content:hover {
+    opacity: 0.5;
+}
+.file-drop-zone-class {
+    height: 20vh;
+    width: 20vh;
+    margin: auto;
+    border: 2px dotted gray;
+    border-radius: 5px;
+}
+
+.file-drop-zone-multi-class {
+    height: 60vh;
+    width: 60vh;
+    margin-top: 20px;
+    border: 2px dotted gray;
+    border-radius: 5px;
+}
+
+.file-drop-zone-multi-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    height: 60vh;
+    width: 60vh;
+    background-image: url("./assets/images/upload.png");
+    background-size: contain;
+}
+#renderElement {
+    height: 50vh;
+    width: 50vh;
+}
+
+#progress-bar {
+    display: none;
+    width: 80%;
+    border: 1px solid;
+    height: 20px;
+    #progress-element {
+        height: 20px;
+        background-color: cornflowerblue;
+        width: 100%;
+    }
+    #progress-status {
+        margin-top: 5px;
+    }
+}
+#reset {
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-image: url("./assets/images/Reset.png");
+    background-size: contain;
+    z-index: 99999;
+}
+
+#progress-object-bar {
+    display: none;
+    width: 80%;
+    border: 1px solid;
+    height: 20px;
+    #progress-object-element {
+        height: 20px;
+        background-color: cornflowerblue;
+        width: 100%;
+    }
+    #progress-object-status {
+        margin-top: 5px;
+    }
+}
+#image-reset {
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-image: url("./assets/images/Reset.png");
+    background-size: contain;
+    z-index: 99999;
+}
+#progress-csv-bar {
+    display: none;
+    width: 80%;
+    border: 1px solid;
+    height: 20px;
+    #progress-csv-element {
+        height: 20px;
+        background-color: cornflowerblue;
+        width: 100%;
+    }
+    #progress-csv-status {
+        margin-top: 5px;
+    }
+}
+#csv-reset {
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-image: url("./assets/images/Reset.png");
+    background-size: contain;
+    z-index: 99999;
+}
+.slideshow-container {
+    width: 50vh;
+}
+#sliderImageComponent {
+    width: 50vh;
+ }
